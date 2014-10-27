@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)http://www.simonbingham.me.uk/projects/angularjs-store/ -->
+<html ng-app="store" class="ng-scope"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>
+		<link rel="stylesheet" type="text/css" href="./angularjs-store_files/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./angularjs-store_files/app.css">
+
+		<script src="./angularjs-store_files/angular.min.js"></script>
+		<script type="text/javascript" src="./angularjs-store_files/app.js"></script>
+		<script type="text/javascript" src="./angularjs-store_files/products.js"></script>
+	</head>
+
+	<body ng-controller="StoreController as store" class="ng-scope">
+		<header>
+			<h1 class="text-center">Flatlander Crafted Gems</h1>
+			<h2 class="text-center">â€“ an Angular store â€“</h2>
+		</header>
+
+		<div class="list-group">
+			<!-- ngRepeat: product in store.products --><div class="list-group-item ng-scope" ng-repeat="product in store.products">
+				<h3 class="ng-binding">Azurite <em class="pull-right ng-binding">$110.50</em></h3>
+
+				<product-gallery><div ng-show="product.images.length" class="">
+	<div class="img-wrap">
+		<img ng-src="img/gem-02.gif" src="./angularjs-store_files/gem-02.gif">
+	</div>
+
+	<ul class="img-thumbnails clearfix">
+		<!-- ngRepeat: image in product.images --><li class="small-image pull-left thumbnail ng-scope" ng-repeat="image in product.images">
+			<img ng-src="img/gem-02.gif" src="./angularjs-store_files/gem-02.gif">
+		</li><!-- end ngRepeat: image in product.images --><li class="small-image pull-left thumbnail ng-scope" ng-repeat="image in product.images">
+			<img ng-src="img/gem-05.gif" src="./angularjs-store_files/gem-05.gif">
+		</li><!-- end ngRepeat: image in product.images --><li class="small-image pull-left thumbnail ng-scope" ng-repeat="image in product.images">
+			<img ng-src="img/gem-09.gif" src="./angularjs-store_files/gem-09.gif">
+		</li><!-- end ngRepeat: image in product.images -->
+	</ul>
+</div>
+</product-gallery>
+
+				<product-tabs><section>
+	<ul class="nav nav-pills">
+		<li ng-class="{ active:tab.isSet(1) }" class=""><a href="" ng-click="tab.setTab(1)">Description</a></li>
+		<li ng-class="{ active:tab.isSet(2) }" class=""><a href="" ng-click="tab.setTab(2)">Specs</a></li>
+		<li ng-class="{ active:tab.isSet(3) }" class="active"><a href="" ng-click="tab.setTab(3)">Reviews</a></li>
+	</ul>
+
+	<!-- ngInclude: 'partials/product-description.html' --><div ng-show="tab.isSet(1)" ng-include="&#39;partials/product-description.html&#39;" class="ng-scope ng-hide"><h4 class="ng-scope">Description</h4>
+
+<blockquote class="ng-binding ng-scope">Some gems have hidden qualities beyond their luster, beyond their 'shine'... Azurite is one of those gems.</blockquote>
+</div>
+
+	<div product-specs="" ng-show="tab.isSet(2)" class="ng-hide"><h4>Specs</h4>
+
+<ul class="list-unstyled">
+	<li class="ng-binding"><strong>Shine</strong>: 8</li>
+	<li class="ng-binding"><strong>Faces</strong>: 14</li>
+	<li class="ng-binding"><strong>Rarity</strong>: 7</li>
+	<li class="ng-binding"><strong>Color</strong>: #CCC</li>
+</ul>
+</div>
+
+	<product-reviews ng-show="tab.isSet(3)" class=""><ul>
+	<h4>Reviews</h4>
+
+	<!-- ngRepeat: review in product.reviews --><li ng-repeat="review in product.reviews" class="ng-scope">
+		<blockquote class="ng-binding">
+			<strong class="ng-binding">5 Stars</strong>
+			I love this gem!
+			<cite class="clearfix ng-binding">—joe@example.org</cite>
+		</blockquote>
+	</li><!-- end ngRepeat: review in product.reviews --><li ng-repeat="review in product.reviews" class="ng-scope">
+		<blockquote class="ng-binding">
+			<strong class="ng-binding">1 Stars</strong>
+			This gem sucks.
+			<cite class="clearfix ng-binding">—tim@example.org</cite>
+		</blockquote>
+	</li><!-- end ngRepeat: review in product.reviews -->
+</ul>
+
+<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid &amp;&amp; reviewCtrl.addReview(product)" novalidate="" class="ng-scope ng-invalid ng-invalid-required ng-dirty">
+	<blockquote class="ng-binding">
+		<strong class="ng-binding">2 Stars</strong>
+		
+		<cite class="clearfix ng-binding">—</cite>
+	</blockquote>
+
+	<h4>Submit a Review</h4>
+
+	<fieldset class="form-group">
+		<select ng-model="reviewCtrl.review.stars" class="form-control ng-dirty ng-valid ng-valid-required" ng-options="stars for stars in [5,4,3,2,1]" title="Stars" required=""><option value="" class="">Rate the Product</option><option value="0">5</option><option value="1">4</option><option value="2">3</option><option value="3">2</option><option value="4">1</option></select>
+	</fieldset>
+
+	<fieldset class="form-group">
+		<textarea ng-model="reviewCtrl.review.body" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Write a short review of the product..." title="Review" required=""></textarea>
+	</fieldset>
+
+	<fieldset class="form-group">
+		<input ng-model="reviewCtrl.review.author" type="email" class="form-control ng-pristine ng-invalid ng-invalid-required ng-valid-email" placeholder="jimmyDean@example.org" title="Email" required="">
+	</fieldset>
+
+	<fieldset class="form-group">
+		<input type="submit" class="btn btn-primary pull-right" value="Submit Review">
+	</fieldset>
+</form>
+</product-reviews>
+</section>
+</product-tabs>
+			</div><!-- end ngRepeat: product in store.products --><div class="list-group-item ng-scope" ng-repeat="product in store.products">
+				<h3 class="ng-binding">Bloodstone <em class="pull-right ng-binding">$22.90</em></h3>
+
+				<product-gallery><div ng-show="product.images.length" class="">
+	<div class="img-wrap">
+		<img ng-src="img/gem-01.gif" src="./angularjs-store_files/gem-01.gif">
+	</div>
+
+	<ul class="img-thumbnails clearfix">
+		<!-- ngRepeat: image in product.images --><li class="small-image pull-left thumbnail ng-scope" ng-repeat="image in product.images">
+			<img ng-src="img/gem-01.gif" src="./angularjs-store_files/gem-01.gif">
+		</li><!-- end ngRepeat: image in product.images --><li class="small-image pull-left thumbnail ng-scope" ng-repeat="image in product.images">
+			<img ng-src="img/gem-03.gif" src="./angularjs-store_files/gem-03.gif">
+		</li><!-- end ngRepeat: image in product.images --><li class="small-image pull-left thumbnail ng-scope" ng-repeat="image in product.images">
+			<img ng-src="img/gem-04.gif" src="./angularjs-store_files/gem-04.gif">
+		</li><!-- end ngRepeat: image in product.images -->
+	</ul>
+</div>
+</product-gallery>
+
+				<product-tabs><section>
+	<ul class="nav nav-pills">
+		<li ng-class="{ active:tab.isSet(1) }" class="active"><a href="" ng-click="tab.setTab(1)">Description</a></li>
+		<li ng-class="{ active:tab.isSet(2) }"><a href="" ng-click="tab.setTab(2)">Specs</a></li>
+		<li ng-class="{ active:tab.isSet(3) }"><a href="" ng-click="tab.setTab(3)">Reviews</a></li>
+	</ul>
+
+	<!-- ngInclude: 'partials/product-description.html' --><div ng-show="tab.isSet(1)" ng-include="&#39;partials/product-description.html&#39;" class="ng-scope"><h4 class="ng-scope">Description</h4>
+
+<blockquote class="ng-binding ng-scope">Origin of the Bloodstone is unknown, hence its low value. It has a very high 'shine' and 12 sides, however.</blockquote>
+</div>
+
+	<div product-specs="" ng-show="tab.isSet(2)" class="ng-hide"><h4>Specs</h4>
+
+<ul class="list-unstyled">
+	<li class="ng-binding"><strong>Shine</strong>: 9</li>
+	<li class="ng-binding"><strong>Faces</strong>: 12</li>
+	<li class="ng-binding"><strong>Rarity</strong>: 6</li>
+	<li class="ng-binding"><strong>Color</strong>: #EEE</li>
+</ul>
+</div>
+
+	<product-reviews ng-show="tab.isSet(3)" class="ng-hide"><ul>
+	<h4>Reviews</h4>
+
+	<!-- ngRepeat: review in product.reviews --><li ng-repeat="review in product.reviews" class="ng-scope">
+		<blockquote class="ng-binding">
+			<strong class="ng-binding">3 Stars</strong>
+			I think this gem was just OK, could honestly use more 'shine', IMO.
+			<cite class="clearfix ng-binding">—JimmyDean@example.org</cite>
+		</blockquote>
+	</li><!-- end ngRepeat: review in product.reviews --><li ng-repeat="review in product.reviews" class="ng-scope">
+		<blockquote class="ng-binding">
+			<strong class="ng-binding">4 Stars</strong>
+			Any gem with 12 'faces' is for me!
+			<cite class="clearfix ng-binding">—gemsRock@example.org</cite>
+		</blockquote>
+	</li><!-- end ngRepeat: review in product.reviews -->
+</ul>
+
+<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid &amp;&amp; reviewCtrl.addReview(product)" novalidate="" class="ng-scope ng-pristine ng-invalid ng-invalid-required">
+	<blockquote class="ng-binding">
+		<strong class="ng-binding"> Stars</strong>
+		
+		<cite class="clearfix ng-binding">—</cite>
+	</blockquote>
+
+	<h4>Submit a Review</h4>
+
+	<fieldset class="form-group">
+		<select ng-model="reviewCtrl.review.stars" class="form-control ng-pristine ng-invalid ng-invalid-required" ng-options="stars for stars in [5,4,3,2,1]" title="Stars" required=""><option value="" class="">Rate the Product</option><option value="0">5</option><option value="1">4</option><option value="2">3</option><option value="3">2</option><option value="4">1</option></select>
+	</fieldset>
+
+	<fieldset class="form-group">
+		<textarea ng-model="reviewCtrl.review.body" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Write a short review of the product..." title="Review" required=""></textarea>
+	</fieldset>
+
+	<fieldset class="form-group">
+		<input ng-model="reviewCtrl.review.author" type="email" class="form-control ng-pristine ng-invalid ng-invalid-required ng-valid-email" placeholder="jimmyDean@example.org" title="Email" required="">
+	</fieldset>
+
+	<fieldset class="form-group">
+		<input type="submit" class="btn btn-primary pull-right" value="Submit Review">
+	</fieldset>
+</form>
+</product-reviews>
+</section>
+</product-tabs>
+			</div><!-- end ngRepeat: product in store.products --><div class="list-group-item ng-scope" ng-repeat="product in store.products">
+				<h3 class="ng-binding">Zircon <em class="pull-right ng-binding">$1,100.00</em></h3>
+
+				<product-gallery><div ng-show="product.images.length" class="">
+	<div class="img-wrap">
+		<img ng-src="img/gem-06.gif" src="./angularjs-store_files/gem-06.gif">
+	</div>
+
+	<ul class="img-thumbnails clearfix">
+		<!-- ngRepeat: image in product.images --><li class="small-image pull-left thumbnail ng-scope" ng-repeat="image in product.images">
+			<img ng-src="img/gem-06.gif" src="./angularjs-store_files/gem-06.gif">
+		</li><!-- end ngRepeat: image in product.images --><li class="small-image pull-left thumbnail ng-scope" ng-repeat="image in product.images">
+			<img ng-src="img/gem-07.gif" src="./angularjs-store_files/gem-07.gif">
+		</li><!-- end ngRepeat: image in product.images --><li class="small-image pull-left thumbnail ng-scope" ng-repeat="image in product.images">
+			<img ng-src="img/gem-08.gif" src="./angularjs-store_files/gem-08.gif">
+		</li><!-- end ngRepeat: image in product.images -->
+	</ul>
+</div>
+</product-gallery>
+
+				<product-tabs><section>
+	<ul class="nav nav-pills">
+		<li ng-class="{ active:tab.isSet(1) }" class="active"><a href="" ng-click="tab.setTab(1)">Description</a></li>
+		<li ng-class="{ active:tab.isSet(2) }"><a href="" ng-click="tab.setTab(2)">Specs</a></li>
+		<li ng-class="{ active:tab.isSet(3) }"><a href="" ng-click="tab.setTab(3)">Reviews</a></li>
+	</ul>
+
+	<!-- ngInclude: 'partials/product-description.html' --><div ng-show="tab.isSet(1)" ng-include="&#39;partials/product-description.html&#39;" class="ng-scope"><h4 class="ng-scope">Description</h4>
+
+<blockquote class="ng-binding ng-scope">Zircon is our most coveted and sought after gem. You will pay much to be the proud owner of this gorgeous and high 'shine' gem.</blockquote>
+</div>
+
+	<div product-specs="" ng-show="tab.isSet(2)" class="ng-hide"><h4>Specs</h4>
+
+<ul class="list-unstyled">
+	<li class="ng-binding"><strong>Shine</strong>: 70</li>
+	<li class="ng-binding"><strong>Faces</strong>: 6</li>
+	<li class="ng-binding"><strong>Rarity</strong>: 2</li>
+	<li class="ng-binding"><strong>Color</strong>: #000</li>
+</ul>
+</div>
+
+	<product-reviews ng-show="tab.isSet(3)" class="ng-hide"><ul>
+	<h4>Reviews</h4>
+
+	<!-- ngRepeat: review in product.reviews --><li ng-repeat="review in product.reviews" class="ng-scope">
+		<blockquote class="ng-binding">
+			<strong class="ng-binding">1 Stars</strong>
+			This gem is WAY too expensive for its 'rarity' value.
+			<cite class="clearfix ng-binding">—turtleguyy@example.org</cite>
+		</blockquote>
+	</li><!-- end ngRepeat: review in product.reviews --><li ng-repeat="review in product.reviews" class="ng-scope">
+		<blockquote class="ng-binding">
+			<strong class="ng-binding">1 Stars</strong>
+			BBW: High 'shine' != High Quality.
+			<cite class="clearfix ng-binding">—LouisW407@example.org</cite>
+		</blockquote>
+	</li><!-- end ngRepeat: review in product.reviews --><li ng-repeat="review in product.reviews" class="ng-scope">
+		<blockquote class="ng-binding">
+			<strong class="ng-binding">1 Stars</strong>
+			Don't waste your rubles!
+			<cite class="clearfix ng-binding">—nat@example.org</cite>
+		</blockquote>
+	</li><!-- end ngRepeat: review in product.reviews -->
+</ul>
+
+<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid &amp;&amp; reviewCtrl.addReview(product)" novalidate="" class="ng-scope ng-pristine ng-invalid ng-invalid-required">
+	<blockquote class="ng-binding">
+		<strong class="ng-binding"> Stars</strong>
+		
+		<cite class="clearfix ng-binding">—</cite>
+	</blockquote>
+
+	<h4>Submit a Review</h4>
+
+	<fieldset class="form-group">
+		<select ng-model="reviewCtrl.review.stars" class="form-control ng-pristine ng-invalid ng-invalid-required" ng-options="stars for stars in [5,4,3,2,1]" title="Stars" required=""><option value="" class="">Rate the Product</option><option value="0">5</option><option value="1">4</option><option value="2">3</option><option value="3">2</option><option value="4">1</option></select>
+	</fieldset>
+
+	<fieldset class="form-group">
+		<textarea ng-model="reviewCtrl.review.body" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Write a short review of the product..." title="Review" required=""></textarea>
+	</fieldset>
+
+	<fieldset class="form-group">
+		<input ng-model="reviewCtrl.review.author" type="email" class="form-control ng-pristine ng-invalid ng-invalid-required ng-valid-email" placeholder="jimmyDean@example.org" title="Email" required="">
+	</fieldset>
+
+	<fieldset class="form-group">
+		<input type="submit" class="btn btn-primary pull-right" value="Submit Review">
+	</fieldset>
+</form>
+</product-reviews>
+</section>
+</product-tabs>
+			</div><!-- end ngRepeat: product in store.products -->
+		</div>
+	
+
+</body></html>
