@@ -1,14 +1,17 @@
 (function() {
-  var app = angular.module('gemStore', ['store-directives']);
+  var app = angular.module('myStore', ['myProducts']);
 
-  app.controller('StoreController', [ '$http', function($http){
+ // app.controller('StoreController', function(){
+ //   this.products = gems;
+ // });
+
+  app.controller('StoreController', ['$http', function($http){
     var store = this;
     store.products = [];
-    
-    $http.get('/store-products.json').success(function(data){
+
+    $http.get('/store-products.json').success(function(data) {
       store.products = data;
     });
-    
   }]);
 
   app.controller('ReviewController', function() {
@@ -20,4 +23,8 @@
       this.review = {};
     };
   });
+
+
+
 })();
+
