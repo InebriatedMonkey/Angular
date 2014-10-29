@@ -9,7 +9,7 @@
     var store = this;
     store.products = [];
 
-    $http.get('/store-products.json').success(function(data) {
+    $http.get('./json/store-products.json').success(function(data) {
       store.products = data;
     });
   }]);
